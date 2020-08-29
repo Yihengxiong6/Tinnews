@@ -6,8 +6,16 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.laioffer.tinnews.model.NewsResponse;
+import com.laioffer.tinnews.network.NewsApi;
+import com.laioffer.tinnews.network.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +34,23 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController); // 具体点哪个button到哪个页面 navbar上的三个button和fragment一一对应
         // 所以bottom_nav_menu里的名字要和layout里一样
         NavigationUI.setupActionBarWithNavController(this, navController); // 显示title
+
+        NewsApi api = RetrofitClient.newInstance(this).create(NewsApi.class);
+        api.getTopHeadlines("US").enqueue(new Callback<NewsResponse>() {
+            @Override
+            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+                if (response.isSuccessful()) {
+                    Log.d("getTopHeadlines", response.body().toString());
+                } else {
+                    Log.d("getTopHeadlines", response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewsResponse> call, Throwable t) {
+                Log.d("getTopHeadlines", t.toString());
+            }
+        });
     }
 
     @Override
