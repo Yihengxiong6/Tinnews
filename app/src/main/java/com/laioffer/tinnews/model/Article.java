@@ -1,20 +1,28 @@
 package com.laioffer.tinnews.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.Objects;
 
+@Entity
 public class Article {
     public String author;
     public String content;
     public String description;
     public String publishedAt;
     public String title;
-    public String url;
+    @NonNull
+    @PrimaryKey
+    public String url; // because url is always unique
     public String urlToImage;
     public boolean favorite;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+
         if (o == null || getClass() != o.getClass()) return false;
         Article article = (Article) o;
         return favorite == article.favorite &&
