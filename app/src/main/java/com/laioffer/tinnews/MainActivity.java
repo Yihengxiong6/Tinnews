@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController(); // 控制上面不同fragmentHost的切换
         NavigationUI.setupWithNavController(navView, navController); // 具体点哪个button到哪个页面 navbar上的三个button和fragment一一对应
         // 所以bottom_nav_menu里的名字要和layout里一样
-        NavigationUI.setupActionBarWithNavController(this, navController); // 显示title
+//        NavigationUI.setupActionBarWithNavController(this, navController); // 显示title
 
 //        NewsApi api = RetrofitClient.newInstance(this).create(NewsApi.class);
 //        api.getTopHeadlines("US").enqueue(new Callback<NewsResponse>() {
